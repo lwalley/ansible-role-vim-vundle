@@ -1,0 +1,10 @@
+---
+- name: Ensure vundle repository is cloned locally.
+  git:
+    repo: "{{ vim_vundle_repo }}"
+    dest: "{{ vim_vundle_local_destination }}"
+  become: no
+- name: Ensure vundle plugins declared in vimrc are installed.
+  # If this hangs it's probably because there is issue with something in vimrc
+  # exit ansible and try running manually to see what the issue is.
+  command: /usr/bin/vim +PluginInstall +qall
